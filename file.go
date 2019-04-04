@@ -10,8 +10,9 @@ import (
 
 type File struct {
 	f    io.ReadWriteSeeker
-	l    sync.Mutex
-	last int // id of last block
+	l    sync.Mutex // file access lock
+	w    sync.Mutex // write lock
+	last int        // id of last block
 }
 
 func Open(filename string) (*File, error) {
